@@ -34,13 +34,20 @@ async function run(){
             res.send(service);
         })
 
+        app.post('/services', async(req, res) =>{
+            const services = req.body;
+            const result = await serviceCollection.insertOne(services)
+            // console.log(result);
+            res.send(result);
+        })
+
 
 
 
         app.post('/comments', async(req, res) =>{
             const comment = req.body;
             const result = await commentCollection.insertOne(comment)
-            console.log(result);
+            // console.log(result);
             res.send(result);
         })
 
@@ -69,7 +76,7 @@ async function run(){
 
         app.delete('/comments/:id', async(req, res) =>{
             const id = req.params.id;
-            console.log(id);
+            // console.log(id);
             const query = {_id: ObjectId(id)};
             const result = await commentCollection.deleteOne(query)
             res.send(result);
